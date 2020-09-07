@@ -2,45 +2,37 @@ import React, { Component } from 'react';
 
 import './styles.css';
 
-const key = '5f96323678d05ff0c4eb264ef184556868e303b32a2db88ecbf15746e6f25e02';
+import Button from '../Button';
 
 class ImageGrid extends Component {
-    state = {
-        images: [],
-    };
+  componentDidMount() {
+    const { loadImages } = this.props;
+    loadImages();
+  }
 
-    componentDidMount() {
-        fetch(`https://api.unsplash.com/photos/?client_id=${key}&per_page=28`)
-            .then(res => res.json())
-            .then(images => {
-                this.setState({
-                    images,
-                });
-            });
-    }
-
-    render() {
-        const { images } = this.state;
-        return (
-            <div className="content">
-                <section className="grid">
-                    {images.map(image => (
-                        <div
-                            key={image.id}
-                            className={`item item-${Math.ceil(
-                                image.height / image.width,
-                            )}`}
-                        >
-                            <img
-                                src={image.urls.small}
-                                alt={image.user.username}
-                            />
-                        </div>
-                    ))}
-                </section>
-            </div>
-        );
-    }
+  render() {
+    const { images, error, isLoading, loadImages } = this.props;
+    return (
+      <div className="content">
+        {images && (
+          <section className="grid">
+            {images.map((image, idx) => (
+              <div
+                key={idx}
+                className={`item item-${Math.ceil(image.height / image.width)}`}
+              >
+                <img src={image.urls.small} alt={image.user.username} />
+              </div>
+            ))}
+          </section>
+        )}
+        {error && <div className="error">{JSON.stringify(error)}</div>}
+        <Button onClick={() => !isLoading && loadImages()} loading={isLoading}>
+          <span>Load More</span>
+        </Button>
+      </div>
+    );
+  }
 }
 
 export default ImageGrid;

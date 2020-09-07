@@ -4,12 +4,14 @@ const loadImages = () => ({
   type: IMAGES.LOAD,
 });
 
-const setImages = () => ({
-  type: IMAGES.LOAD_SUCCESS,
-  images,
-});
+const setImages = images => {
+  return {
+    type: IMAGES.LOAD_SUCCESS,
+    images,
+  };
+};
 
-const setError = () => ({
+const setError = error => ({
   type: IMAGES.LOAD_FAIL,
   error,
 });
