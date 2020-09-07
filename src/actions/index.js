@@ -1,4 +1,4 @@
-import { IMAGES } from '../constants';
+import { IMAGES, STATS } from '../constants';
 
 const loadImages = () => ({
   type: IMAGES.LOAD,
@@ -16,4 +16,20 @@ const setError = error => ({
   error,
 });
 
-export { loadImages, setImages, setError };
+const loadStats = () => ({
+  type: STATS.LOAD,
+});
+
+const setStats = images => {
+  return {
+    type: IMAGES.LOAD_SUCCESS,
+    images,
+  };
+};
+
+const setStatsError = error => ({
+  type: STATS.LOAD_FAIL,
+  error,
+});
+
+export { loadImages, setImages, setError, loadStats, setStats, setStatsError };
