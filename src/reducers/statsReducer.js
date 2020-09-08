@@ -26,7 +26,7 @@ const statsReducer = (state = {}, action) => {
         [action.id]: {
           isLoading: false,
           downloads: null,
-          error: action.error,
+          error: true,
         },
       };
     default:

@@ -16,20 +16,24 @@ const setError = error => ({
   error,
 });
 
-const loadStats = () => ({
-  type: STATS.LOAD,
-});
-
-const setStats = images => {
+const loadStats = id => {
   return {
-    type: IMAGES.LOAD_SUCCESS,
-    images,
+    type: STATS.LOAD,
+    id,
   };
 };
 
-const setStatsError = error => ({
+const setStats = (id, downloads) => {
+  return {
+    type: STATS.LOAD_SUCCESS,
+    id,
+    downloads,
+  };
+};
+
+const setStatsError = id => ({
   type: STATS.LOAD_FAIL,
-  error,
+  id,
 });
 
 export { loadImages, setImages, setError, loadStats, setStats, setStatsError };

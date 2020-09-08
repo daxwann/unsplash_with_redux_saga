@@ -16,4 +16,16 @@ const fetchImages = async pageNumber => {
   return data;
 };
 
-export { fetchImages };
+const fetchStats = async imageId => {
+  const response = await fetch(`${URL}/${imageId}/statistics?client_id=${KEY}`);
+
+  const data = await response.json();
+
+  if (response.status >= 400) {
+    throw new Error(data.errors);
+  }
+
+  return data;
+};
+
+export { fetchImages, fetchStats };

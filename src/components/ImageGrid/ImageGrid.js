@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import './styles.css';
 
 import Button from '../Button';
+import Stats from '../ImageStats';
 
 class ImageGrid extends Component {
   componentDidMount() {
@@ -11,7 +12,7 @@ class ImageGrid extends Component {
   }
 
   render() {
-    const { images, error, isLoading, loadImages } = this.props;
+    const { images, error, isLoading, loadImages, imageStats } = this.props;
     return (
       <div className="content">
         {images && (
@@ -21,6 +22,7 @@ class ImageGrid extends Component {
                 key={idx}
                 className={`item item-${Math.ceil(image.height / image.width)}`}
               >
+                <Stats stats={imageStats[image.id]} />
                 <img src={image.urls.small} alt={image.user.username} />
               </div>
             ))}
